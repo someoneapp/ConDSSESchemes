@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package HDXTSU;
+
+service RPC {
+
+// Setup
+rpc setup (stream SetupRequestMessage) returns ( ExecuteStatus ) {}
+
+// Search
+rpc consearch (stream SearchRequestMessage) returns (stream SearchReply) {}
+
+// Update
+rpc tupdate (stream UpdateRequestMessage1) returns ( ExecuteStatus ) {}
+rpc evict (stream EvictRequestMessage) returns ( ExecuteStatus) {}
+
+}
+
+message SetupRequestMessage
+{
+    uint32 index = 1;
+    bytes label = 2;
+    bytes enc = 3;
+}
+
+message SearchRequestMessage
+{
+    uint32 index = 1;
+    bytes st = 2;
+    uint32 n = 3;
+    bytes label = 4;
+    bytes d1 = 5;
+    bytes d2 = 6;
+}
+
+
+message SearchReply
+{
+    uint32 index = 1;
+	bytes eid = 2;
+    //bytes label = 4;
+    //bytes scnt = 5;
+	//bytes sum = 6;
+}
+
+message UpdateRequestMessage1
+{
+    bytes ut = 1;
+    bytes e = 2;
+    //bytes proof = 3;
+	//uint64 counter = 3;
+}
+
+message EvictRequestMessage
+{
+    bytes index = 1;
+    bytes label = 2;
+    bytes enc = 3;
+}
+
+message ExecuteStatus
+{
+	bool status = 1; 
+}

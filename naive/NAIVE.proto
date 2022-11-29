@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package NAIVE;
+
+service RPC {
+
+// Setup
+rpc setup (stream SetupRequestMessage) returns ( ExecuteStatus ) {}
+
+// Search
+rpc consearch (stream SearchRequestMessage) returns (stream SearchReply) {}
+
+// Update
+rpc tupdate (stream UpdateRequestMessage1) returns ( ExecuteStatus ) {}
+
+}
+
+message SetupRequestMessage
+{
+    uint32 index = 1;
+    bytes label = 2;
+    bytes enc = 3;
+}
+
+
+message SearchRequestMessage
+{
+    uint32 index1 = 1;
+    uint32 index2 = 2;
+    bytes st = 3;
+}
+
+
+
+message SearchReply
+{
+    uint32 index1 = 1;
+    uint32 index2 = 2;
+	bytes eid = 3;
+}
+
+
+message UpdateRequestMessage1
+{
+    bytes ut = 1;
+    bytes e = 2;
+    //bytes proof = 3;
+	//uint64 counter = 3;
+}
+
+
+message ExecuteStatus
+{
+	bool status = 1; 
+}
