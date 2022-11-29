@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package CQDSSE;
+
+service RPC {
+
+// Setup
+rpc setup (stream SetupRequestMessage) returns ( ExecuteStatus ) {}
+
+// Search
+rpc consearch (stream SearchRequestMessage) returns (stream SearchReply) {}
+
+// Update
+rpc tupdate (stream UpdateRequestMessage1) returns ( ExecuteStatus ) {}
+
+}
+
+message SetupRequestMessage
+{
+    bytes label = 1;
+    bytes cst = 2;
+    bytes enc = 3;
+}
+
+
+
+message SearchRequestMessage
+{
+    bytes kw = 1;
+    bytes st = 2;
+    uint32 c = 3;
+}
+
+
+message SearchReply
+{
+    uint32 index = 1;
+	bytes eid = 2;
+    bytes label = 3;
+    bytes scnt = 4;
+	bytes sum = 5;
+}
+
+message UpdateRequestMessage1
+{
+    //uint32 index = 1;
+    bytes label = 1;
+    bytes cst = 2;
+    bytes enc = 3;
+}
+
+
+message ExecuteStatus
+{
+	bool status = 1; 
+}
