@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package HXT;
+
+service RPC {
+
+// Setup
+rpc setup (stream SetupRequestMessage) returns ( ExecuteStatus ) {}
+
+
+// Search
+rpc consearch (stream SearchRequestMessage) returns (stream SearchReply) {}
+}
+
+
+message SetupRequestMessage
+{
+    uint32 index = 1;
+    bytes label = 2;
+    bytes enc = 3;
+}
+
+
+
+message SearchRequestMessage
+{
+    bytes stag = 1;
+    uint32 index = 2;
+    bytes xtokenx = 3;
+    bytes xtokeny = 4;
+    bytes d1 = 5;
+    bytes d2 = 6;
+}
+
+
+
+message SearchReply
+{
+    uint32 index = 1;
+    bytes h = 2;
+	bytes eid = 3;
+
+}
+
+
+
+
+message ExecuteStatus
+{
+	bool status = 1; 
+}
